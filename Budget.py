@@ -5,17 +5,17 @@ import csv
 import matplotlib.pyplot as plt
 
 ################################################## IDEA NOTES!!! ####################################################################
-#   fix the remove purchase function it is currently looking to delete items in empty list instead of deleting from spreadsheet     #
-#   Add IF/ELSE to money report to allow user to look at money spent per Category                                                   #
+#                                                                                                                                   #
+#   Add ability to view purchase by week, by month, by year...                                                                      #
 #   Add option to view money purchased on average per day                                                                           #
 #####################################################################################################################################
 
 
 #look to move DT/time into function instead of global variable
-now = datetime.now()
+
 totalPurchases = 0.0
 listPurchases = []
-dt = now.strftime("%d/%m/%Y %H:%M:%S")
+
 
 
 
@@ -95,6 +95,9 @@ def menuAction(menuSelection):
 # adds purchase to ledger
 def purchase():
     global dt
+    now = datetime.now()
+    dt = now.strftime("%d/%m/%Y %H:%M:%S")
+    
     count = 0
     clear()
     print("\nWelcome to the record purchase menu:\n\n")
