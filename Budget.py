@@ -45,7 +45,7 @@ def clearLedger():
     else:
         getMenu()
 
-
+# function to start program and bring up customer menu options to route the application.
 def getMenu():
     menuSelection = ''
 
@@ -161,6 +161,8 @@ def purchase():
         print("Invalid Selection!")
         purchase()
 
+# FIX ME: Currently no idexing for purchases. Function not usable.
+#function to find purchase by field.
 def findPurchase():
     count = 0
     print("Welcome to the find the purchase.\n")
@@ -218,7 +220,7 @@ def viewMoneyReport():
         print("No transactions. Exiting...")
         sleep(10)
 
-
+# FIX ME: not current ability to pull from category. Need to be able to be selected via a list or dict.
 def changeCategory():
     print("\nWelcome to the Change Category menu:\n\n")
     sleep(2)
