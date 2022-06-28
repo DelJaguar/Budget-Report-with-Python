@@ -183,6 +183,7 @@ def findPurchase():
 
 
 # determines if ledger file has contents and if it does it prints report.
+# need to fix pie chart to make it more readable.
 def viewMoneyReport():
     cost = 0
     alcoholCost = 0
@@ -191,35 +192,35 @@ def viewMoneyReport():
     otherCost = 0
     print("\nWelcome to the Report menu:\n\n")
     # print("Date/Time\t\t     Amount\t\tPurchase Category\n\n")
-    if os.stat('ledger.csv').st_size != 0:
-        with open('ledger.csv') as f:
-            reader = csv.DictReader(f, fieldnames=("Time", "Price", "Category"))
-            for row in reader:
-                if row["Category"].lower() == "alcohol":
-                    alcoholCost += float(row["Price"])
-                if row["Category"].lower() == "grocery":
-                    groceryCost += float(row["Price"])
-                if row["Category"].lower() == "pets":
-                    petsCost += float(row["Price"])
-                if row["Category"].lower() == "fun/other":
-                    otherCost += float(row["Price"])
-                # newline = line.replace(',', ' ')
-                # print(newline)
-                cost += alcoholCost + groceryCost + otherCost + petsCost
-            print(f'You spent ${alcoholCost} on Booze.\nYou spent ${groceryCost} on Groceries.\nYou spent ${petsCost} on Pets.\nYou spent ${otherCost} on other items.')
-        print(f'Total amount spent: ${cost}.')
-        labels = 'Alcohol', 'Grocery', 'Pets', 'Other'
-        sizes = [alcoholCost, groceryCost, petsCost, otherCost]
-        fig1, ax1 = plt.subplots()
-        ax1.pie(sizes, labels=labels, autopct='%1.1f%%',
-                shadow=True, startangle=90)
-        ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    try:
+        if os.stat('ledger.csv').st_size != 0:
+            with open('ledger.csv') as f:
+                reader = csv.DictReader(f, fieldnames=("Time", "Price", "Category"))
+                for row in reader:
+                    if row["Category"].lower() == "alcohol":
+                        alcoholCost += float(row["Price"])
+                    if row["Category"].lower() == "grocery":
+                        groceryCost += float(row["Price"])
+                    if row["Category"].lower() == "pets":
+                        petsCost += float(row["Price"])
+                    if row["Category"].lower() == "fun/other":
+                        otherCost += float(row["Price"])
+                    # newline = line.replace(',', ' ')
+                    # print(newline)
+                    cost += alcoholCost + groceryCost + otherCost + petsCost
+                print(f'You spent ${alcoholCost} on Booze.\nYou spent ${groceryCost} on Groceries.\nYou spent ${petsCost} on Pets.\nYou spent ${otherCost} on other items.')
+            print(f'Total amount spent: ${cost}.')
+            labels = 'Alcohol', 'Grocery', 'Pets', 'Other'
+            sizes = [alcoholCost, groceryCost, petsCost, otherCost]
+            fig1, ax1 = plt.subplots()
+            ax1.pie(sizes, labels=labels, autopct='%.0f%%')
+            # ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
-        plt.show()
-    else:
+            plt.show()
+        
+    except:
         print("No transactions. Exiting...")
-        sleep(10)
-
+        sleep(5)
 # FIX ME: not current ability to pull from category. Need to be able to be selected via a list or dict.
 def changeCategory():
     print("\nWelcome to the Change Category menu:\n\n")
