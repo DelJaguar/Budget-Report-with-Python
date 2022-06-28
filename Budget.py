@@ -45,14 +45,6 @@ def clearLedger():
     else:
         getMenu()
 
-#function not in use. not needed for program Needs to be moved to a package for type writing.
-def typewriter(print_input, speed):
-    j = 0
-    for i in print_input:
-        print(print_input[j], end=' ', flush=True)
-        sleep(speed)
-        j += 1
-
 
 def getMenu():
     menuSelection = ''
