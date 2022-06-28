@@ -4,14 +4,10 @@ from datetime import datetime
 import csv
 import matplotlib.pyplot as plt
 
-################################################## IDEA NOTES!!! ####################################################################
-#                                                                                                                                   #
-#   Add ability to view purchase by week, by month, by year...                                                                      #
-#   Add option to view money purchased on average per day                                                                           #
-#####################################################################################################################################
 
 
-#look to move DT/time into function instead of global variable
+
+
 
 totalPurchases = 0.0
 listPurchases = []
@@ -58,10 +54,10 @@ def getMenu():
 
 # receives and process menu selection from cli input
 def menuAction(menuSelection):
-    global totalPurchases, listPurchases
+    
     if menuSelection == '1':
         purchase()
-        # totalPurchases, listPurchases = modifyPurchases(purchaseAmount, purchaseCategory)
+        
         while 1 == 1:
             purchase()
         sleep(15)
@@ -243,19 +239,9 @@ def removePurchase():
     print(listPurchases.index(selection))
     removePurchase()
 
-
-def modifyPurchases(purchaseAmount, purchaseCategory):
-    clear()
-    global totalPurchases, listPurchases
-    totalPurchases += purchaseAmount
-    listPurchases.append([purchaseCategory, purchaseAmount])
-    print(
-        f'You have spent {totalPurchases} so far. Here is your list of purchases\n{listPurchases}')
-    sleep(3)
-    print("\nReturning to purchase Menu....")
-    sleep(3)
-    clear()
-    return totalPurchases, listPurchases
+# commenting out function as it is never called. Needs to be implemented later.
+# def modifyPurchases():
+#     #removing contents as it requests a variable no longer in use.
 
 
 main()
