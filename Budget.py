@@ -3,8 +3,7 @@ from time import sleep
 from datetime import datetime
 import csv
 import matplotlib.pyplot as plt
-
-
+from tkinter import *
 
 
 
@@ -13,16 +12,45 @@ totalPurchases = 0.0
 listPurchases = []
 
 
-
-
 def main():
-    clear()
-    getMenu()
-    exit()
+    windowCreation()
+    # importPurchases()
+    # clear()
+    # getMenu()
+    # exit()
 
-# function to get files. deprecated.
-# def getFiles():
-    # pass
+
+
+
+# Add graphical menu to replace getMenu() and menuAction()
+def windowCreation():
+    window = Tk()
+    window.title("Main Menu")
+    window.configure(background="black")
+    
+    # button section
+    ### make first button
+    Button (window, text="Record Purchase", width=20, command=purchase) .grid(row=0, column=0, sticky=W)
+
+    ### make second button
+    Button (window, text="View Money Spent", width=20, command=viewMoneyReport) .grid(row=0, column=1, sticky=W)
+
+    ### make third button
+    Button (window, text="Define New Category", width=20, command=changeCategory) .grid(row=1, column=0, sticky=W)
+
+    ### make fourth button
+    Button (window, text="Remove Purchase", width=20, command=removePurchase) .grid(row=1, column=1, sticky=W)
+
+    ### make exit button
+    Button (window, text="Clear Ledger", width=20, command=clearLedger) .grid(row=2, column= 0, sticky=W)
+
+    ### make exit button
+    Button (window, text="Quit", width=20, command=exit) .grid(row=2, column= 1, sticky=W)
+
+    window.mainloop()
+
+
+
 
 # function to clear the screen.
 def clear():
@@ -244,4 +272,20 @@ def removePurchase():
 #     #removing contents as it requests a variable no longer in use.
 
 
+# will use to read file and copy contents to ledger.csv file
+# need to add ability to check that number of columns
+# need to add check that field contents are correct type
+def importPurchases():
+    Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
+    filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+    print(filename)
+    reader = csv.reader(f, filename)
+    num_cols = 3
+    with open(filename) as f:
+        if num_cols == len(reader.next()): 
+            for row in f.readlines():
+                print(row)
+        else:
+            print("Error!!")
+    sleep(3)
 main()
