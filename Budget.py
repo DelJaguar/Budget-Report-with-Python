@@ -8,8 +8,6 @@ from tkinter import *
 
 
 
-totalPurchases = 0.0
-listPurchases = []
 
 
 def main():
@@ -152,8 +150,8 @@ def purchase():
                
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
-                sleep(5)
-            return dt, purchaseAmount, purchaseCategory
+                # sleep(5)
+            # return dt, purchaseAmount, purchaseCategory
         elif menuSelection == '3':
             purchaseCategory = "Pets"
             with open('ledger.csv', 'a') as f:
