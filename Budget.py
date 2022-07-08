@@ -42,9 +42,50 @@ class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="Start Page", font=LARGE_FONT)
+        label = tk.Label(self, text="$$ Money Menu $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button.pack()
+        
+        button2 = tk.Button(self, text="Money Report", font=LARGE_FONT, command=viewMoneyReport, width=15)
+        button2.pack()
 
+        button3 = tk.Button(self, text="New Category", font=LARGE_FONT, command=changeCategory, width=15)
+        button3.pack()
+
+        button4 = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=removePurchase, width=15)
+        button4.pack()
+
+        button5 = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=clearLedger, width=15)
+        button5.pack()
+
+        button6 = tk.Button(self, text="Quit", font=LARGE_FONT, command=quit, width=15)
+        button6.pack()
+   
+     #button section
+     ### make first button
+#     Button (window, text="Record Purchase", width=20, command=purchase) .grid(row=0, column=0, sticky=W)
+
+#     ### make second button
+#     Button (window, text="View Money Spent", width=20, command=viewMoneyReport) .grid(row=0, column=1, sticky=W)
+
+#     ### make third button
+#     Button (window, text="Define New Category", width=20, command=changeCategory) .grid(row=1, column=0, sticky=W)
+
+#     ### make fourth button
+#     Button (window, text="Remove Purchase", width=20, command=removePurchase) .grid(row=1, column=1, sticky=W)
+
+#     ### make exit button
+#     Button (window, text="Clear Ledger", width=20, command=clearLedger) .grid(row=2, column= 0, sticky=W)
+
+#     ### make exit button
+#     Button (window, text="Quit", width=20, command=exit) .grid(row=2, column= 1, sticky=W)
+    
+    
+    
+#     window.minsize(500,500)
+#     window.maxsize(500,500)
 
 
 
