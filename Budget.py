@@ -3,7 +3,91 @@ from time import sleep
 from datetime import datetime
 import csv
 import matplotlib.pyplot as plt
-from tkinter import *
+import tkinter as tk
+
+
+LARGE_FONT = ("Verdana", 12)
+# FIX ME importPurchases function doesn't import and write file to ledger.csv that needs to be further developed.
+
+class windowManager(tk.Tk):
+    
+    def __init__(self, *args, **kwargs):
+        
+        tk.Tk.__init__(self, *args, **kwargs)
+        container = tk.Frame(self)
+
+        container.pack(side="top", fill="both", expand = True)            
+
+        container.grid_rowconfigure(0, weight=1)
+        container.grid_columnconfigure(0, weight=1)
+
+        self.frames = {}
+
+        frame = StartPage(container, self)
+
+        self.frames[StartPage] = frame
+
+        frame.grid(row=0, column=0, sticky="nsew")
+
+        self.show_frame(StartPage)
+
+
+    def show_frame(self, cont):
+        
+        frame = self.frames[cont]                        
+        frame.tkraise()
+
+
+class StartPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Money Menu $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button.pack()
+        
+        button2 = tk.Button(self, text="Money Report", font=LARGE_FONT, command=viewMoneyReport, width=15)
+        button2.pack()
+
+        button3 = tk.Button(self, text="New Category", font=LARGE_FONT, command=changeCategory, width=15)
+        button3.pack()
+
+        button4 = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=removePurchase, width=15)
+        button4.pack()
+
+        button5 = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=clearLedger, width=15)
+        button5.pack()
+
+        button6 = tk.Button(self, text="Quit", font=LARGE_FONT, command=quit, width=15)
+        button6.pack()
+   
+     #button section
+     ### make first button
+#     Button (window, text="Record Purchase", width=20, command=purchase) .grid(row=0, column=0, sticky=W)
+
+#     ### make second button
+#     Button (window, text="View Money Spent", width=20, command=viewMoneyReport) .grid(row=0, column=1, sticky=W)
+
+#     ### make third button
+#     Button (window, text="Define New Category", width=20, command=changeCategory) .grid(row=1, column=0, sticky=W)
+
+#     ### make fourth button
+#     Button (window, text="Remove Purchase", width=20, command=removePurchase) .grid(row=1, column=1, sticky=W)
+
+#     ### make exit button
+#     Button (window, text="Clear Ledger", width=20, command=clearLedger) .grid(row=2, column= 0, sticky=W)
+
+#     ### make exit button
+#     Button (window, text="Quit", width=20, command=exit) .grid(row=2, column= 1, sticky=W)
+    
+    
+    
+#     window.minsize(500,500)
+#     window.maxsize(500,500)
+
+
 
 
 
@@ -11,7 +95,8 @@ from tkinter import *
 
 
 def main():
-    windowCreation()
+    app = windowManager()
+    app.mainloop()
     # importPurchases()
     # clear()
     # getMenu()
@@ -21,32 +106,37 @@ def main():
 
 
 # Add graphical menu to replace getMenu() and menuAction()
-def windowCreation():
-    window = Tk()
-    window.title("Main Menu")
-    window.configure(background="black")
+# def windowCreation():
+#     window = tk
+#     window.title("Main Menu")
+#     window.configure(background="black")
     
-    # button section
-    ### make first button
-    Button (window, text="Record Purchase", width=20, command=purchase) .grid(row=0, column=0, sticky=W)
+#     # button section
+#     ### make first button
+#     Button (window, text="Record Purchase", width=20, command=purchase) .grid(row=0, column=0, sticky=W)
 
-    ### make second button
-    Button (window, text="View Money Spent", width=20, command=viewMoneyReport) .grid(row=0, column=1, sticky=W)
+#     ### make second button
+#     Button (window, text="View Money Spent", width=20, command=viewMoneyReport) .grid(row=0, column=1, sticky=W)
 
-    ### make third button
-    Button (window, text="Define New Category", width=20, command=changeCategory) .grid(row=1, column=0, sticky=W)
+#     ### make third button
+#     Button (window, text="Define New Category", width=20, command=changeCategory) .grid(row=1, column=0, sticky=W)
 
-    ### make fourth button
-    Button (window, text="Remove Purchase", width=20, command=removePurchase) .grid(row=1, column=1, sticky=W)
+#     ### make fourth button
+#     Button (window, text="Remove Purchase", width=20, command=removePurchase) .grid(row=1, column=1, sticky=W)
 
-    ### make exit button
-    Button (window, text="Clear Ledger", width=20, command=clearLedger) .grid(row=2, column= 0, sticky=W)
+#     ### make exit button
+#     Button (window, text="Clear Ledger", width=20, command=clearLedger) .grid(row=2, column= 0, sticky=W)
 
-    ### make exit button
-    Button (window, text="Quit", width=20, command=exit) .grid(row=2, column= 1, sticky=W)
+#     ### make exit button
+#     Button (window, text="Quit", width=20, command=exit) .grid(row=2, column= 1, sticky=W)
+    
+    
+    
+#     window.minsize(500,500)
+#     window.maxsize(500,500)
+    
 
-    window.mainloop()
-
+#     window.mainloop()
 
 
 
@@ -141,7 +231,7 @@ def purchase():
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
                 sleep(5)
-            return dt, purchaseAmount, purchaseCategory
+            purchase()
         elif menuSelection == '2':
             purchaseCategory = "Alcohol"
             with open('ledger.csv', 'a') as f:
@@ -151,7 +241,7 @@ def purchase():
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
                 # sleep(5)
-            # return dt, purchaseAmount, purchaseCategory
+            purchase()
         elif menuSelection == '3':
             purchaseCategory = "Pets"
             with open('ledger.csv', 'a') as f:
@@ -161,7 +251,7 @@ def purchase():
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
                 sleep(5)
-            return dt, purchaseAmount, purchaseCategory
+            purchase()
         elif menuSelection == '4':
             purchaseCategory = "Fun/Other"
             with open('ledger.csv', 'a') as f:
@@ -171,14 +261,14 @@ def purchase():
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
                 sleep(5)
-            return dt, purchaseAmount, purchaseCategory
+            purchase()
         else:
             print("Incorrect selection. Exiting entry...")
             getMenu()
     elif menuSelection.lower() == 'q':
         print("Exiting...")
         sleep(4)
-        getMenu()
+        
     else:
         print("Invalid Selection!")
         purchase()
