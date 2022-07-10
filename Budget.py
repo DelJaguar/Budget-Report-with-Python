@@ -253,25 +253,6 @@ def purchase():
         print("Invalid Selection!")
         purchase()
 
-# FIX ME: Currently no idexing for purchases. Function not usable.
-#function to find purchase by field.
-def findPurchase():
-    count = 0
-    print("Welcome to the find the purchase.\n")
-    selection = input("Please input the date(DD/MM/YYYY), Purchase Amount or Purchase Category:\t")
-    with open('ledger.csv', 'r') as f:
-                reader = csv.reader(f)
-                # next(reader, None)  # discard the header
-                
-                for row in reader:
-                    count += 1
-                    for field in row:
-                        
-                        if field.lower() == str(selection).lower():
-                            print(row)
-
-                sleep(5)
-    
 
 
 # determines if ledger file has contents and if it does it prints report.
