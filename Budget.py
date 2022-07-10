@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import tkinter as tk
 
 
-LARGE_FONT = ("Verdana", 12)
+LARGE_FONT = ("Verdana", 10)
 # FIX ME importPurchases function doesn't import and write file to ledger.csv that needs to be further developed.
 
 class windowManager(tk.Tk):
@@ -23,11 +23,14 @@ class windowManager(tk.Tk):
 
         self.frames = {}
 
-        frame = StartPage(container, self)
+        for F in (StartPage, Purchases, MoneyReport, NewCategory, RemovePurchase, ClearLedger):
 
-        self.frames[StartPage] = frame
 
-        frame.grid(row=0, column=0, sticky="nsew")
+            frame = F(container, self)
+
+            self.frames[F] = frame
+
+            frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame(StartPage)
 
@@ -45,53 +48,102 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="$$ Money Menu $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
-        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=lambda: controller.show_frame(Purchases), width=15)
         button.pack()
         
-        button2 = tk.Button(self, text="Money Report", font=LARGE_FONT, command=viewMoneyReport, width=15)
+        button2 = tk.Button(self, text="Money Report", font=LARGE_FONT, command=lambda: controller.show_frame(MoneyReport), width=15)
         button2.pack()
 
-        button3 = tk.Button(self, text="New Category", font=LARGE_FONT, command=changeCategory, width=15)
+        button3 = tk.Button(self, text="New Category", font=LARGE_FONT, command=lambda: controller.show_frame(NewCategory), width=15)
         button3.pack()
 
-        button4 = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=removePurchase, width=15)
+        button4 = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=lambda: controller.show_frame(RemovePurchase), width=15)
         button4.pack()
 
-        button5 = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=clearLedger, width=15)
+        button5 = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=lambda: controller.show_frame(ClearLedger), width=15)
         button5.pack()
 
         button6 = tk.Button(self, text="Quit", font=LARGE_FONT, command=quit, width=15)
         button6.pack()
    
-     #button section
-     ### make first button
-#     Button (window, text="Record Purchase", width=20, command=purchase) .grid(row=0, column=0, sticky=W)
 
-#     ### make second button
-#     Button (window, text="View Money Spent", width=20, command=viewMoneyReport) .grid(row=0, column=1, sticky=W)
+class Purchases(tk.Frame):
 
-#     ### make third button
-#     Button (window, text="Define New Category", width=20, command=changeCategory) .grid(row=1, column=0, sticky=W)
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Purchase Menu $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
-#     ### make fourth button
-#     Button (window, text="Remove Purchase", width=20, command=removePurchase) .grid(row=1, column=1, sticky=W)
+class Purchases(tk.Frame):
 
-#     ### make exit button
-#     Button (window, text="Clear Ledger", width=20, command=clearLedger) .grid(row=2, column= 0, sticky=W)
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Purchase Menu $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
-#     ### make exit button
-#     Button (window, text="Quit", width=20, command=exit) .grid(row=2, column= 1, sticky=W)
-    
-    
-    
-#     window.minsize(500,500)
-#     window.maxsize(500,500)
+class MoneyReport(tk.Frame):
 
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Report Menu $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Generate Report", font=LARGE_FONT, command=viewMoneyReport, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
+class NewCategory(tk.Frame):
 
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Define New Category $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="New Category", font=LARGE_FONT, command=changeCategory, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
+class RemovePurchase(tk.Frame):
 
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Define New Category $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=removePurchase, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
+class ClearLedger(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Clear Ledger $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=clearLedger, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
 
 def main():
@@ -104,39 +156,6 @@ def main():
 
 
 
-
-# Add graphical menu to replace getMenu() and menuAction()
-# def windowCreation():
-#     window = tk
-#     window.title("Main Menu")
-#     window.configure(background="black")
-    
-#     # button section
-#     ### make first button
-#     Button (window, text="Record Purchase", width=20, command=purchase) .grid(row=0, column=0, sticky=W)
-
-#     ### make second button
-#     Button (window, text="View Money Spent", width=20, command=viewMoneyReport) .grid(row=0, column=1, sticky=W)
-
-#     ### make third button
-#     Button (window, text="Define New Category", width=20, command=changeCategory) .grid(row=1, column=0, sticky=W)
-
-#     ### make fourth button
-#     Button (window, text="Remove Purchase", width=20, command=removePurchase) .grid(row=1, column=1, sticky=W)
-
-#     ### make exit button
-#     Button (window, text="Clear Ledger", width=20, command=clearLedger) .grid(row=2, column= 0, sticky=W)
-
-#     ### make exit button
-#     Button (window, text="Quit", width=20, command=exit) .grid(row=2, column= 1, sticky=W)
-    
-    
-    
-#     window.minsize(500,500)
-#     window.maxsize(500,500)
-    
-
-#     window.mainloop()
 
 
 
@@ -157,44 +176,7 @@ def clearLedger():
     else:
         getMenu()
 
-# function to start program and bring up customer menu options to route the application.
-def getMenu():
-    menuSelection = ''
 
-    while menuSelection != '5':
-
-        menuSelection = input(
-            "\nWhat do you want to do?\n\n1.) Record Purchase\n2.) View Money Spent\n3.) Define New category\n4.) Remove Purchase\n5.) Clear Ledger\n6.) Quit\n7.) Find Transaction\n\n")
-        clear()
-        menuAction(menuSelection)
-
-# receives and process menu selection from cli input
-def menuAction(menuSelection):
-    
-    if menuSelection == '1':
-        purchase()
-        
-        while 1 == 1:
-            purchase()
-        sleep(15)
-    elif menuSelection == '2':
-        viewMoneyReport()
-    elif menuSelection == '3':
-        changeCategory()
-    elif menuSelection == '4':
-        removePurchase()
-    elif menuSelection == '5':
-        clearLedger()
-    elif menuSelection == '6':
-        clear()
-        quit()
-    elif menuSelection == '7':
-        clear()
-        findPurchase()
-    else:
-        print("\n\nInvalid entry. Please try again.")
-
-    clear()
 
 # adds purchase to ledger
 def purchase():
@@ -216,12 +198,7 @@ def purchase():
         menuSelection = input("\nMake your selection: ")
         if menuSelection == '1':
             purchaseCategory = "Grocery"
-            # section needs to be touched up so it can write to specific files and colums
-            # Will need logic to write and move logic for search to it's own function 
-            #
-            # Commenting out file open to replace txt with a csv
-            # with open(ledger, 'a') as f:
-            #     f.write(f'{dt}, {purchaseAmount}, {purchaseCategory}\n')
+
             
             #see if we can move the csv write section to it's own function
             with open('ledger.csv', 'a') as f:
@@ -347,17 +324,11 @@ def removePurchase():
         f'\nWelcome to the remove purchase menu:\n\nWhat purchase do you want to remove? {listPurchases}')
     selection = int(
         input("Pick dollar amount of the purchase you want to remove: "))
-    # if selection in listPurchases:
-    #     print(listPurchases.index(selection))
-    # else:
-    #     print("Error!!!")
-    #     print(listPurchases[selection])
+
     print(listPurchases.index(selection))
     removePurchase()
 
-# commenting out function as it is never called. Needs to be implemented later.
-# def modifyPurchases():
-#     #removing contents as it requests a variable no longer in use.
+
 
 
 # will use to read file and copy contents to ledger.csv file
