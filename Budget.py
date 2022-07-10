@@ -67,18 +67,7 @@ class StartPage(tk.Frame):
         button6.pack()
    
 
-class Purchases(tk.Frame):
 
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="$$ Purchase Menu $$", font=LARGE_FONT)
-        label.pack(pady=10, padx=10)
-        
-        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
-        button.pack()
-        
-        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
-        button.pack()
 
 class Purchases(tk.Frame):
 
@@ -87,6 +76,22 @@ class Purchases(tk.Frame):
         label = tk.Label(self, text="$$ Purchase Menu $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
+        label = tk.Label(self, text="Cost", width=10)
+        label.pack()
+
+        inputtxt = tk.Entry(self, width=12)
+        inputtxt.pack()
+
+        label2 = tk.Label(self, text="Category")
+        label2.pack()
+
+        variable = tk.StringVar(self)
+        variable.set("Grocery")
+
+        w = tk.OptionMenu(self, variable, "Grocery", "Alcohol","Pets", "Fun/Other")
+        w.pack()
+
+
         button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
         button.pack()
         
@@ -99,6 +104,7 @@ class MoneyReport(tk.Frame):
         tk.Frame.__init__(self,parent)
         label = tk.Label(self, text="$$ Report Menu $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
+        
         
         button = tk.Button(self, text="Generate Report", font=LARGE_FONT, command=viewMoneyReport, width=15)
         button.pack()
