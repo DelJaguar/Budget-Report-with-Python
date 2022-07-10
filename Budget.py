@@ -160,7 +160,7 @@ def clear():
 def clearLedger():
     selection = input(
         'Select Y/y to clear the ledger. You cannot undo this!\t')
-    if selection == 'y':
+    if selection.lower == 'y':
         try:
             print("\nClearing all purchases")
             os.remove('ledger.csv')
