@@ -102,44 +102,7 @@ def clearLedger():
     else:
         getMenu()
 
-# function to start program and bring up customer menu options to route the application.
-def getMenu():
-    menuSelection = ''
 
-    while menuSelection != '5':
-
-        menuSelection = input(
-            "\nWhat do you want to do?\n\n1.) Record Purchase\n2.) View Money Spent\n3.) Define New category\n4.) Remove Purchase\n5.) Clear Ledger\n6.) Quit\n7.) Find Transaction\n\n")
-        clear()
-        menuAction(menuSelection)
-
-# receives and process menu selection from cli input
-def menuAction(menuSelection):
-    
-    if menuSelection == '1':
-        purchase()
-        
-        while 1 == 1:
-            purchase()
-        sleep(15)
-    elif menuSelection == '2':
-        viewMoneyReport()
-    elif menuSelection == '3':
-        changeCategory()
-    elif menuSelection == '4':
-        removePurchase()
-    elif menuSelection == '5':
-        clearLedger()
-    elif menuSelection == '6':
-        clear()
-        quit()
-    elif menuSelection == '7':
-        clear()
-        findPurchase()
-    else:
-        print("\n\nInvalid entry. Please try again.")
-
-    clear()
 
 # adds purchase to ledger
 def purchase():
