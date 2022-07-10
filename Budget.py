@@ -155,10 +155,7 @@ class ClearLedger(tk.Frame):
 def main():
     app = windowManager()
     app.mainloop()
-    # importPurchases()
-    # clear()
-    # getMenu()
-    # exit()
+
 
 
 
@@ -353,4 +350,6 @@ def importPurchases():
         else:
             print("Error!!")
     sleep(3)
-main()
+
+if __name__ =="__main__":
+    main()
