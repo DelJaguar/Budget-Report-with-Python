@@ -23,11 +23,14 @@ class windowManager(tk.Tk):
 
         self.frames = {}
 
-        frame = StartPage(container, self)
+        for F in (StartPage, Purchases, MoneyReport, NewCategory, RemovePurchase, ClearLedger):
 
-        self.frames[StartPage] = frame
 
-        frame.grid(row=0, column=0, sticky="nsew")
+            frame = F(container, self)
+
+            self.frames[F] = frame
+
+            frame.grid(row=0, column=0, sticky="nsew")
 
         self.show_frame(StartPage)
 
@@ -45,31 +48,102 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="$$ Money Menu $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
-        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=lambda: controller.show_frame(Purchases), width=15)
         button.pack()
         
-        button2 = tk.Button(self, text="Money Report", font=LARGE_FONT, command=viewMoneyReport, width=15)
+        button2 = tk.Button(self, text="Money Report", font=LARGE_FONT, command=lambda: controller.show_frame(MoneyReport), width=15)
         button2.pack()
 
-        button3 = tk.Button(self, text="New Category", font=LARGE_FONT, command=changeCategory, width=15)
+        button3 = tk.Button(self, text="New Category", font=LARGE_FONT, command=lambda: controller.show_frame(NewCategory), width=15)
         button3.pack()
 
-        button4 = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=removePurchase, width=15)
+        button4 = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=lambda: controller.show_frame(RemovePurchase), width=15)
         button4.pack()
 
-        button5 = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=clearLedger, width=15)
+        button5 = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=lambda: controller.show_frame(ClearLedger), width=15)
         button5.pack()
 
         button6 = tk.Button(self, text="Quit", font=LARGE_FONT, command=quit, width=15)
         button6.pack()
    
 
+class Purchases(tk.Frame):
 
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Purchase Menu $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
+class Purchases(tk.Frame):
 
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Purchase Menu $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
+class MoneyReport(tk.Frame):
 
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Report Menu $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Generate Report", font=LARGE_FONT, command=viewMoneyReport, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
+class NewCategory(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Define New Category $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="New Category", font=LARGE_FONT, command=changeCategory, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
+
+class RemovePurchase(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Define New Category $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=removePurchase, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
+
+class ClearLedger(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="$$ Clear Ledger $$", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+        
+        button = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=clearLedger, width=15)
+        button.pack()
+        
+        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button.pack()
 
 
 def main():
