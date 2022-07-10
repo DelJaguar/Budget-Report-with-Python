@@ -7,7 +7,7 @@ import tkinter as tk
 
 
 LARGE_FONT = ("Verdana", 10)
-# FIX ME importPurchases function doesn't import and write file to ledger.csv that needs to be further developed.
+
 
 class windowManager(tk.Tk):
     
@@ -152,16 +152,6 @@ class ClearLedger(tk.Frame):
         button.pack()
 
 
-def main():
-    app = windowManager()
-    app.mainloop()
-
-
-
-
-
-
-
 # function to clear the screen.
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -171,13 +161,13 @@ def clearLedger():
     selection = input(
         'Select Y/y to clear the ledger. You cannot undo this!\t')
     if selection == 'y':
-        print("\nClearing all purchases")
-        sleep(5)
-        os.remove('ledger.csv')
-        clear()
-        getMenu()
-    else:
-        getMenu()
+        try:
+            print("\nClearing all purchases")
+            os.remove('ledger.csv')
+            print("Purchases cleared")
+        except:
+            print("No purchases to clear")
+        
 
 
 
@@ -331,6 +321,11 @@ def importPurchases():
         else:
             print("Error!!")
     sleep(3)
+
+
+def main():
+    app = windowManager()
+    app.mainloop()
 
 if __name__ =="__main__":
     main()
