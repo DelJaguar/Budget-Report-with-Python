@@ -2,6 +2,7 @@ import os
 from time import sleep
 from datetime import datetime
 import csv
+from tkinter import messagebox
 import matplotlib.pyplot as plt
 import tkinter as tk
 
@@ -23,7 +24,7 @@ class windowManager(tk.Tk):
 
         self.frames = {}
 
-        for F in (StartPage, Purchases, MoneyReport, NewCategory, RemovePurchase, ClearLedger):
+        for F in (StartPage, Purchases, MoneyReport, NewCategory, RemovePurchase, ClearLedger, LedgerCleared):
 
 
             frame = F(container, self)
@@ -138,6 +139,7 @@ class RemovePurchase(tk.Frame):
         button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
         button.pack()
 
+# runs clearLedger function and navigates between two windows
 class ClearLedger(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -145,21 +147,30 @@ class ClearLedger(tk.Frame):
         label = tk.Label(self, text="$$ Clear Ledger $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
-        button = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=clearLedger, width=15)
+        button = tk.Button(self, text="Yes", font=LARGE_FONT, command=lambda: [clearLedger("y"),controller.show_frame(LedgerCleared)], width=5)
+        
         button.pack()
         
-        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
-        button.pack()
+        button2 = tk.Button(self, text="No", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=5)
+        button2.pack()
 
+class LedgerCleared(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self,parent)
+        label = tk.Label(self, text="Ledger Cleared!", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        button = tk.Button(self, text="Main Menu", command=lambda: [clearLedger("y"),controller.show_frame(StartPage)])
+        button.pack()
 
 # function to clear the screen.
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 # function to wipe the ledger files.
-def clearLedger():
-    selection = input(
-        'Select Y/y to clear the ledger. You cannot undo this!\t')
+def clearLedger(selection):
+    
     if selection.lower() == 'y':
         try:
             print("\nClearing all purchases")
