@@ -92,7 +92,7 @@ class Purchases(tk.Frame):
         w.pack()
 
 
-        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=purchase, width=15)
+        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=getEntry, width=15)
         button.pack()
         
         button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
@@ -167,7 +167,9 @@ def main():
     app.mainloop()
 
 
-
+def getEntry():
+    e_text=tk.Entry.get()
+    print(e_text)
 
 
 
