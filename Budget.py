@@ -139,6 +139,7 @@ class RemovePurchase(tk.Frame):
         button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
         button.pack()
 
+# runs clearLedger function and navigates between two windows
 class ClearLedger(tk.Frame):
 
     def __init__(self, parent, controller):
