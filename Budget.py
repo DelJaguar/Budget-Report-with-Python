@@ -1,5 +1,4 @@
 import os
-from time import sleep
 from datetime import datetime
 import csv
 import matplotlib.pyplot as plt
@@ -221,7 +220,7 @@ def purchase():
                
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
-                sleep(5)
+                
             purchase()
         elif menuSelection == '2':
             purchaseCategory = "Alcohol"
@@ -231,7 +230,7 @@ def purchase():
                
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
-                # sleep(5)
+                
             purchase()
         elif menuSelection == '3':
             purchaseCategory = "Pets"
@@ -241,7 +240,7 @@ def purchase():
                
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
-                sleep(5)
+                
             purchase()
         elif menuSelection == '4':
             purchaseCategory = "Fun/Other"
@@ -251,14 +250,14 @@ def purchase():
                
                 writer = csv.writer(f)
                 writer.writerow([dt, purchaseAmount, purchaseCategory])
-                sleep(5)
+                
             purchase()
         else:
             print("Incorrect selection. Exiting entry...")
             getMenu()
     elif menuSelection.lower() == 'q':
         print("Exiting...")
-        sleep(4)
+        
         
     else:
         print("Invalid Selection!")
@@ -304,11 +303,11 @@ def viewMoneyReport():
         
     except:
         print("No transactions. Exiting...")
-        sleep(5)
+        
 # FIX ME: not current ability to pull from category. Need to be able to be selected via a list or dict.
 def changeCategory():
     print("\nWelcome to the Change Category menu:\n\n")
-    sleep(2)
+    
     pass
 
 #need to add section to remove row. can use previous code from find purchase function?
@@ -341,7 +340,7 @@ def importPurchases():
                 print(row)
         else:
             print("Error!!")
-    sleep(3)
+    
 
 if __name__ =="__main__":
     main()
