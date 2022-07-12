@@ -3,6 +3,7 @@ from datetime import datetime
 import csv
 import matplotlib.pyplot as plt
 import tkinter as tk
+from tkinter import ttk
 
 
 LARGE_FONT = ("Verdana", 10)
@@ -47,22 +48,22 @@ class StartPage(tk.Frame):
         label = tk.Label(self, text="$$ Money Menu $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
-        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=lambda: controller.show_frame(Purchases), width=15)
+        button = ttk.Button(self, text="Record Purchase", command=lambda: controller.show_frame(Purchases), width=15)
         button.pack()
         
-        button2 = tk.Button(self, text="Money Report", font=LARGE_FONT, command=lambda: controller.show_frame(MoneyReport), width=15)
+        button2 = ttk.Button(self, text="Money Report", command=lambda: controller.show_frame(MoneyReport), width=15)
         button2.pack()
 
-        button3 = tk.Button(self, text="New Category", font=LARGE_FONT, command=lambda: controller.show_frame(NewCategory), width=15)
+        button3 = ttk.Button(self, text="New Category", command=lambda: controller.show_frame(NewCategory), width=15)
         button3.pack()
 
-        button4 = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=lambda: controller.show_frame(RemovePurchase), width=15)
+        button4 = ttk.Button(self, text="Remove Purchase", command=lambda: controller.show_frame(RemovePurchase), width=15)
         button4.pack()
 
-        button5 = tk.Button(self, text="Clear Ledger", font=LARGE_FONT, command=lambda: controller.show_frame(ClearLedger), width=15)
+        button5 = ttk.Button(self, text="Clear Ledger", command=lambda: controller.show_frame(ClearLedger), width=15)
         button5.pack()
 
-        button6 = tk.Button(self, text="Quit", font=LARGE_FONT, command=quit, width=15)
+        button6 = ttk.Button(self, text="Quit", command=quit, width=15)
         button6.pack()
    
 
@@ -72,13 +73,13 @@ class Purchases(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="$$ Purchase Menu $$", font=LARGE_FONT)
+        label = ttk.Label(self, text="$$ Purchase Menu $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
-        label = tk.Label(self, text="Cost", width=10)
+        label = ttk.Label(self, text="Cost", width=10)
         label.pack()
 
-        inputtxt = tk.Entry(self, width=12)
+        inputtxt = ttk.Entry(self, width=12)
         inputtxt.pack()
 
         label2 = tk.Label(self, text="Category")
@@ -87,78 +88,78 @@ class Purchases(tk.Frame):
         variable = tk.StringVar(self)
         variable.set("Grocery")
 
-        w = tk.OptionMenu(self, variable, "Grocery", "Alcohol","Pets", "Fun/Other")
+        w = ttk.OptionMenu(self, variable, "Grocery", "Alcohol","Pets", "Fun/Other")
         w.pack()
 
 
-        button = tk.Button(self, text="Record Purchase", font=LARGE_FONT, command=getEntry, width=15)
+        button = ttk.Button(self, text="Record Purchase", command=getEntry, width=15)
         button.pack()
         
-        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button = ttk.Button(self, text="Main Menu", command=lambda: controller.show_frame(StartPage), width=15)
         button.pack()
 
 class MoneyReport(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="$$ Report Menu $$", font=LARGE_FONT)
+        label = ttk.Label(self, text="$$ Report Menu $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
         
-        button = tk.Button(self, text="Generate Report", font=LARGE_FONT, command=viewMoneyReport, width=15)
+        button = ttk.Button(self, text="Generate Report", command=viewMoneyReport, width=15)
         button.pack()
         
-        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button = ttk.Button(self, text="Main Menu", command=lambda: controller.show_frame(StartPage), width=15)
         button.pack()
 
 class NewCategory(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="$$ Define New Category $$", font=LARGE_FONT)
+        label = ttk.Label(self, text="$$ Define New Category $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
-        button = tk.Button(self, text="New Category", font=LARGE_FONT, command=changeCategory, width=15)
+        button = ttk.Button(self, text="New Category", command=changeCategory, width=15)
         button.pack()
         
-        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button = ttk.Button(self, text="Main Menu", command=lambda: controller.show_frame(StartPage), width=15)
         button.pack()
 
 class RemovePurchase(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="$$ Define New Category $$", font=LARGE_FONT)
+        label = ttk.Label(self, text="$$ Define New Category $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
-        button = tk.Button(self, text="Remove Purchase", font=LARGE_FONT, command=removePurchase, width=15)
+        button = ttk.Button(self, text="Remove Purchase", command=removePurchase, width=15)
         button.pack()
         
-        button = tk.Button(self, text="Main Menu", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=15)
+        button = ttk.Button(self, text="Main Menu",  command=lambda: controller.show_frame(StartPage), width=15)
         button.pack()
 
 class ClearLedger(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="$$ Clear Ledger $$", font=LARGE_FONT)
+        label = ttk.Label(self, text="$$ Clear Ledger $$", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
         
-        button = tk.Button(self, text="Yes", font=LARGE_FONT, command=lambda: [clearLedger("y"),controller.show_frame(LedgerCleared)], width=5)
+        button = ttk.Button(self, text="Yes", command=lambda: [clearLedger("y"),controller.show_frame(LedgerCleared)], width=5)
         
         button.pack()
         
-        button2 = tk.Button(self, text="No", font=LARGE_FONT, command=lambda: controller.show_frame(StartPage), width=5)
+        button2 = ttk.Button(self, text="No", command=lambda: controller.show_frame(StartPage), width=5)
         button2.pack()
 
 class LedgerCleared(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self,parent)
-        label = tk.Label(self, text="Ledger Cleared!", font=LARGE_FONT)
+        label = ttk.Label(self, text="Ledger Cleared!", font=LARGE_FONT)
         label.pack(pady=10, padx=10)
 
-        button = tk.Button(self, text="Main Menu", command=lambda: [clearLedger("y"),controller.show_frame(StartPage)])
+        button = ttk.Button(self, text="Main Menu", command=lambda: [clearLedger("y"),controller.show_frame(StartPage)])
         button.pack()
 
 def main():
